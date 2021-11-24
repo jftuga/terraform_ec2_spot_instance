@@ -18,7 +18,14 @@ provisioner "local-exec" {
 
 ## AMI Discovery
 
-*Work in progress...*
+```shell
+# get a subset of available images in the specified region
+aws ec2 describe-images --region ap-south-1 --filters "Name=name,Values=Fedora-Cloud-Base-35*" > Fedora-Cloud-Base-35-ap-south-1.json
 
-* aws ec2 describe-images --region ap-south-1 --filters "Name=name,Values=Fedora-Cloud-Base-35*" > Fedora-Cloud-Base-35-ap-south-1.json
-* grep "Name.*2021.*x86_64.*gp2" Fedora-Cloud-Base-35-ap-south-1.json
+# select images that are:
+# Fedora 35
+# are not Beta
+# use the x86_64 architecture
+# use gp2 EBS
+jq '.Images | .[] | select(.Name|test("35-[^B].*x86_64.*gp2")) | .Name,.CreationDate,.ImageId' Fedora-Cloud-Base-35-ap-south-1.json
+```
