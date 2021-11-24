@@ -7,7 +7,7 @@ Use terraform to create an EC2 spot instance
 * **Remove:** terraform destroy -var-file="example.tfvars"
 
 ## Special Note
-The `resources.tf` file contains this code to modify the local `known_hosts` file, which allows `ssh` to operate without being prompted to accept a new ssh key.  If you don't `sleep` first, the instance might not be ready to accept connections and thus a failure will occur.  **This has only been tested on a Linux platform.**
+The [resources.tf](resources.tf) file contains this code to modify the local `known_hosts` file, which allows `ssh` to operate without being prompted to accept a new ssh key.  If you don't `sleep` first, the instance might not be ready to accept connections and thus a failure will occur.  **This has only been tested on a Linux platform.**
 
 ```
 provisioner "local-exec" {
