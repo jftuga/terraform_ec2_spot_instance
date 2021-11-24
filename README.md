@@ -14,6 +14,7 @@ provisioner "local-exec" {
     command = "sleep 30; ssh-keyscan -t rsa ${aws_spot_instance_request.ec2_instance.public_ip} >> ~/.ssh/known_hosts"
 }
 ```
+* See also: https://en.wikibooks.org/wiki/OpenSSH/Client_Configuration_Files#~/.ssh/known_hosts
 
 ## AMI Discovery
 
