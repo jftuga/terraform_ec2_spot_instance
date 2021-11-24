@@ -2,7 +2,7 @@
 Use terraform to create an EC2 spot instance
 
 ## Execution
-* Edit this file first: `example.tfvars`
+* Edit this file first: [example.tfvars](example.tfvars)
 * **Create:** terraform apply -var-file="example.tfvars"
 * **Remove:** terraform destroy -var-file="example.tfvars"
 
