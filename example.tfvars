@@ -1,0 +1,6 @@
+profile         = "ec2-admin"
+region          = "ap-south-1"
+ssh_key_name    = "AP-South-1"
+ami             = "ami-05f31878a7323235a"
+inst_type       = "t3a.small"
+spot_price_max  = "0.004"
