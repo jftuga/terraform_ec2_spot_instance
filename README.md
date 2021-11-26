@@ -3,7 +3,7 @@ Use terraform to create an EC2 spot instance
 
 ## Execution
 * Edit this file first: [example.tfvars](example.tfvars)
-* * See below on how to find a AMI value
+* * See below on how to find the AMI value
 * **Create:** terraform apply -var-file="example.tfvars"
 * **Remove:** terraform destroy -var-file="example.tfvars"
 
