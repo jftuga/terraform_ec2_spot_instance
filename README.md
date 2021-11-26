@@ -17,7 +17,7 @@ provisioner "local-exec" {
 ```
 * See also: https://en.wikibooks.org/wiki/OpenSSH/Client_Configuration_Files#~/.ssh/known_hosts
 
-## AMI Discovery
+## AMI Discovery - Fedora 35
 
 Get a filtered list of AMIs:
 
@@ -30,7 +30,7 @@ aws ec2 describe-images --region ap-south-1 --filters "Name=name,Values=Fedora-C
 #   Fedora 35
 #   are not Beta
 #   use the x86_64 architecture
-#   use gp2 EBS
+#   use GP2 volume type
 jq -r '.Images | .[] | select(.Name|test("35-[^B].*x86_64.*gp2")) | .Name,.CreationDate,.ImageId,""' Fedora-Cloud-Base-35-ap-south-1.json
 ```
 
@@ -56,4 +56,33 @@ ami-07c986d3a0bf92d5b
 Fedora-Cloud-Base-35-1.2.x86_64-hvm-ap-south-1-gp2-0
 2021-10-26T08:54:14.000Z
 ami-0a60b5e120358751c
+```
+
+## AMI Discovery - Amazon Linux 2
+
+Get a filtered list of AMIs:
+
+```shell
+# get a subset of available images in the specified region
+aws ec2 describe-images --profile ec2-admin --region ap-south-1 --filters "Name=name,Values=amzn2-ami-kernel*" > Amzn2-ap-south-1.json
+
+# select images that are:
+#   in the ap-south-1 region
+#   Amazon Linux 2
+#   built in November 2011
+#   use the x86_64 architecture
+#   use EBS volume type
+jq -r '.Images | .[] | select(.Name|test("amzn2-ami-kernel.*202111.*x86.*ebs")) | .Name,.CreationDate,.ImageId,""' Amzn2-ap-south-1.json
+```
+
+Example output:
+
+```shell
+amzn2-ami-kernel-5.10-hvm-2.0.20211103.0-x86_64-ebs
+2021-11-09T05:02:27.000Z
+ami-0d35efdf0cdae6b54
+
+amzn2-ami-kernel-5.10-hvm-2.0.20211103.1-x86_64-ebs
+2021-11-14T20:16:13.000Z
+ami-0f78570aad7eeb5aa
 ```
