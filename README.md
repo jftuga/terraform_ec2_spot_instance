@@ -31,8 +31,8 @@ aws ec2 describe-images --region ap-south-1 --filters "Name=name,Values=Fedora-C
 #   are not Beta
 #   use the x86_64 architecture
 #   use GP2 volume type
-jq -r '.Images | .[] | select(.Name|test("35-[^B].*x86_64.*gp2")) | [.Name,.CreationDate,.ImageId] | @tsv' \
-   Fedora-Cloud-Base-35-ap-south-1.json | sort -nk2
+jq -r '.Images | sort_by(.CreationDate) | .[] | select(.Name|test("35-[^B].*x86_64.*gp2")) | [.Name,.CreationDate,.ImageId] | @tsv' \
+   Fedora-Cloud-Base-35-ap-south-1.json
 ```
 
 Example output, sorted from oldest to newest CreationDate:
