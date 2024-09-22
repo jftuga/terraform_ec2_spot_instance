@@ -6,6 +6,11 @@ resource "aws_spot_instance_request" "ec2_instance" {
   spot_price                  = var.spot_price_max
   spot_type                   = "one-time"
   instance_type               = var.inst_type
+}
+
+resource "null_resource" "ssh_keyscan" {
+  depends_on = [aws_spot_instance_request.ec2_instance]
+
   provisioner "local-exec" {
     command = "sleep 30; ssh-keyscan -t rsa ${aws_spot_instance_request.ec2_instance.public_dns} >> ~/.ssh/known_hosts; ssh-keyscan -t rsa ${aws_spot_instance_request.ec2_instance.public_ip} >> ~/.ssh/known_hosts"
   }
