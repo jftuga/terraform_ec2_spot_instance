@@ -1,6 +1,8 @@
 # terraform_ec2_spot_instance
 Use terraform to create an EC2 spot instance
 
+**2024-09-22 NOTE**: This project also works with [OpenTofu](https://opentofu.org/) 😎
+
 ## Execution
 * Edit this file first: [example.tfvars](example.tfvars)
 * * See below on how to find the AMI value
